@@ -1,5 +1,26 @@
 # Telecom Customer Intelligence Platform (FastAPI + HTML/CSS/JS frontend)
 
+Churn prediction and retention decision prototype built during an internship at e& Egypt. The model is trained on the
+public **IBM Telco Customer Churn** dataset (7,043 customers), not on e& customer data.
+
+## Model & results
+
+Five algorithms (Logistic Regression, KNN, SVM, Random Forest, XGBoost) were compared under three class-imbalance
+strategies (none, class weights, SMOTE) with stratified 5-fold cross-validation and randomized hyperparameter search.
+The selected model is **SVM + SMOTE**, evaluated once on a held-out test set (1,409 customers, 26.5% churn):
+
+| Decision rule | Threshold | Precision | Recall | F1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Default | 0.50 | 0.523 | 0.775 | 0.625 |
+| Best F1 | 0.64 | 0.573 | 0.717 | 0.637 |
+| Business cost (missed churner = 5× false alarm) | 0.26 | 0.438 | **0.909** | 0.591 |
+
+Test ROC-AUC: **0.844**. Global churn drivers were analysed with SHAP in the notebook; the app shows rule-based driver
+explanations derived from that analysis (`app/core/shap_engine.py`), not per-customer SHAP values.
+
+The LLM layer (free-text extraction and analyst Q&A) defaults to `deepseek-ai/DeepSeek-V3-0324` through Hugging Face
+Inference Providers; set `CHAT_MODEL_ID` to use another model.
+
 ## طريقة التشغيل
 
 ```bash
@@ -79,9 +100,9 @@ requirements.txt
   اللي بتحوّل وصف الموظف النصي (عربي/إنجليزي) لحقول `CustomerInput`
   المطلوبة، من غير ما تخترع أي قيمة مش مذكورة، وبترجع الحقول الناقصة عشان
   الشاتبوت يسأل عنها.
-- الـ `.env.example` معمول مسبقًا على `Qwen/Qwen2.5-7B-Instruct` (الموديل
-  اللي طلبته)، عبر `huggingface_hub.InferenceClient.chat_completion` — أي
-  حساب Hugging Face مجاني شغال معاه.
+- الـ `.env.example` معمول مسبقًا على `deepseek-ai/DeepSeek-V3-0324`، عبر
+  `huggingface_hub.InferenceClient.chat_completion` — أي حساب Hugging Face
+  مجاني شغال معاه.
 
 ## خطوات التشغيل
 
