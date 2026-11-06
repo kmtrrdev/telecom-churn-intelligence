@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Intelligence & Churn Analytics Hub</title>
+  
+  <!-- Typography & Styling -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js (Local Vendor Script) -->
+  <script src="/static/vendor/chart.umd.min.js"></script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="/static/style.css?v=5">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- TOPBAR / NAVBAR -->
+    <header class="navbar">
+      <div class="navbar-brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="16" width="5" height="12" rx="2" class="bar-1"/>
+            <rect x="11" y="10" width="5" height="18" rx="2" class="bar-2"/>
+            <rect x="19" y="5" width="5" height="23" rx="2" class="bar-3"/>
+            <rect x="27" y="2" width="4" height="26" rx="2" class="bar-4"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Churn Intelligence</span>
+          <span class="brand-tag">AI Analytics & Cohort Engine</span>
+        </div>
+      </div>
+
+      <!-- STREAMLINED NAVIGATION TABS -->
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          Executive Dashboard
+        </button>
+        <button class="nav-tab" data-tab="customer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Customer Intelligence
+        </button>
+        <button class="nav-tab" data-tab="directory">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Data Hub & Directory
+        </button>
+      </nav>
+
+      <!-- SERVER STATUS & AI ASSISTANT -->
+      <div class="navbar-right">
+        <button class="btn btn-sm btn-outline" id="btnToggleAiDrawer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          AI Assistant
+        </button>
+        <div class="status-pill" id="serverStatusPill">
+          <span class="status-dot pulsing" id="statusDot"></span>
+          <span id="statusText">Connecting...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT BODY -->
+    <main class="main-content">
+
+      <!-- ================= 1. EXECUTIVE DASHBOARD VIEW ================= -->
+      <section class="tab-view active" id="view-dashboard">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">Executive Analytics Dashboard</h1>
+            <p class="view-subtitle">High-level cohort intelligence, churn probability breakdown, and retention ROI</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="btnRefreshDashboard">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Refresh Analytics
+            </button>
+          </div>
+        </div>
+
+        <!-- DASHBOARD EMPTY STATE (WHEN NO CSV FILE IS UPLOADED) -->
+        <div class="empty-state card" id="dashboardEmptyState" hidden>
+          <div class="empty-icon">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <h3>No CSV Dataset Active</h3>
+          <p>Upload a customer dataset to evaluate churn risks, financial exposure, and campaign ROI.</p>
+          <div class="margin-top">
+            <button class="btn btn-primary" id="btnGoToUpload">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload CSV Dataset Now
+            </button>
+          </div>
+        </div>
+
+        <!-- DASHBOARD KPI METRICS GRID -->
+        <div class="kpi-grid" id="kpiGrid">
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Total Customers</span>
+              <div class="kpi-icon icon-indigo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpiTotalCustomers">—</div>
+            <div class="kpi-sub" id="kpiSourceSub">Active Dataset Cohort</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Cohort Churn Rate</span>
+              <div class="kpi-icon icon-rose">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value text-rose" id="kpiChurnRate">—</div>
+            <div class="kpi-sub" id="kpiChurnAvgProb">Mean Probability: —</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Revenue Exposure at Risk</span>
+              <div class="kpi-icon icon-amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value text-amber" id="kpiExpectedLoss">—</div>
+            <div class="kpi-sub">Total Monthly Expected Loss</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Net Retention Campaign ROI</span>
+              <div class="kpi-icon icon-emerald">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value text-emerald" id="kpiNetROI">—</div>
+            <div class="kpi-sub" id="kpiRetainableSub">Retainable Benefit: —</div>
+          </div>
+        </div>
+
+        <!-- 6 INTERACTIVE CHARTS GRID SECTION -->
+        <div class="charts-grid">
+          <!-- CHART 1: CHURN RISK DISTRIBUTION -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3>Risk Band Distribution</h3>
+              <span class="badge badge-outline">Cohort Breakdown</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartRiskDistribution"></canvas>
+            </div>
+          </div>
+
+          <!-- CHART 2: FINANCIAL IMPACT -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3>Financial Exposure & Retention Benefit</h3>
+              <span class="badge badge-outline">USD ($)</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartFinancialImpact"></canvas>
+            </div>
+          </div>
+
+          <!-- CHART 3: CHURN BY CONTRACT TYPE -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3>Churn Rate by Contract Type</h3>
+              <span class="badge badge-outline">Contract Comparison</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartContractChurn"></canvas>
+            </div>
+          </div>
+
+          <!-- CHART 4: BEHAVIORAL COMMERCIAL SEGMENTS -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3>Behavioral Segment Distribution</h3>
+              <span class="badge badge-outline">Customer Lenses</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartBehavioralSegments"></canvas>
+            </div>
+          </div>
+
+          <!-- CHART 5: NEXT BEST ACTION ALLOCATION -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3>Next Best Action Distribution</h3>
+              <span class="badge badge-outline">Strategy Allocation</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartNextBestAction"></canvas>
+            </div>
+          </div>
+
+          <!-- CHART 6: TOP RISK DRIVERS -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3>Top Cohort Churn Risk Factors</h3>
+              <span class="badge badge-outline">SHAP Impact</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartRiskDrivers"></canvas>
+            </div>
+          </div>
+
+          <!-- CHART 7: TAILORED RETENTION CAMPAIGNS -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3>Tailored Campaign Strategy Distribution</h3>
+              <span class="badge badge-outline">Cohort Catalog</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="chartCampaignDistribution"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOP AT-RISK CUSTOMERS TABLE CARD -->
+        <div class="card margin-top" id="topRiskCard">
+          <div class="card-title-bar">
+            <h2>Critical At-Risk Customers (Top Priority Cohort)</h2>
+            <span class="badge badge-high">High Revenue Exposure</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Churn Probability</th>
+                  <th>Risk Band</th>
+                  <th>Estimated Value</th>
+                  <th>Behavioral Segment</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="topRiskTableBody">
+                <tr><td colspan="6" class="text-center">Loading at-risk customers...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 2. SINGLE CUSTOMER ANALYSIS VIEW ================= -->
+      <section class="tab-view" id="view-customer">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">Customer Intelligence & Deep Dive</h1>
+            <p class="view-subtitle">Search customer profiles by ID or extract details interactively using AI</p>
+          </div>
+        </div>
+
+        <!-- UNIFIED SEARCH BAR -->
+        <div class="card search-panel">
+          <div class="search-flex">
+            <div class="search-input-wrap">
+              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="custSearchInput" class="form-control" placeholder="Search Customer ID (e.g. 7590-VHVEG)...">
+            </div>
+            <button class="btn btn-primary" id="custSearchBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Search Customer ID
+            </button>
+            <button class="btn btn-outline" id="btnDescribeNew">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              Describe Customer via Chat
+            </button>
+          </div>
+          <div id="custSearchMsgHost"></div>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div class="empty-state" id="customerEmptyState">
+          <div class="empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>No Customer Profile Loaded</h3>
+          <p>Enter a Customer ID above or click "Describe Customer via Chat" to extract customer profile data automatically.</p>
+        </div>
+
+        <!-- NATURAL LANGUAGE CHAT EXTRACTION SECTION -->
+        <div class="card" id="customerCollectSection" hidden>
+          <div class="card-title-bar">
+            <h2>AI Natural Language Customer Data Extractor</h2>
+            <span class="badge badge-pending">Collecting Parameters</span>
+          </div>
+          <div class="chat-box" id="collectThread"></div>
+          <div class="composer-container">
+            <input type="text" id="collectInput" class="composer-input" dir="auto" placeholder="Describe customer parameters (e.g., customer with fiber internet, monthly contract, $95 monthly fee, 2 months tenure)...">
+            <button class="btn btn-primary" id="collectSend">Send Parameter</button>
+          </div>
+        </div>
+
+        <!-- CUSTOMER RESULT DISPLAY CONTAINER -->
+        <div id="customerResult" hidden>
+          <!-- HERO HEADER BANNER -->
+          <div class="customer-hero-card" id="customerHeaderCard"></div>
+
+          <div class="customer-grid">
+            <!-- LEFT COLUMN: RISK GAUGE & OVERVIEW -->
+            <div class="customer-col">
+              <div class="card">
+                <h3>Churn Risk Probability Meter</h3>
+                <div class="chart-container gauge-container">
+                  <canvas id="chartCustomerGauge"></canvas>
+                </div>
+              </div>
+
+              <!-- CUSTOMER ECONOMICS CARD -->
+              <div class="card">
+                <div class="card-title-bar">
+                  <h3>Customer Economics & LTV</h3>
+                  <span class="badge badge-outline" id="dqBadge">Data Quality: GOOD</span>
+                </div>
+                <div class="details-list" id="customerEconomicsList"></div>
+              </div>
+
+              <div class="card">
+                <h3>Account & Service Details</h3>
+                <div class="details-list" id="customerDetailsList"></div>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: DRIVERS & RECOMMENDATIONS -->
+            <div class="customer-col">
+              <div class="card">
+                <h3>Behavioral Commercial Segment</h3>
+                <div class="chip-group margin-top" id="segmentChips"></div>
+                <div class="card margin-top" style="background:rgba(15,23,42,0.6); border-color:var(--border-color);" id="behSegmentReasonBox">
+                  <div style="font-weight:600; color:var(--accent-indigo);" id="behSegmentName">Segment: —</div>
+                  <div style="font-size:13px; color:var(--text-muted); margin-top:4px;" id="behSegmentReason">Reasoning rationale loading...</div>
+                </div>
+                <hr class="divider">
+                <h4>Primary Churn Risk Factors (SHAP Drivers)</h4>
+                <div class="drivers-list" id="driversCard"></div>
+              </div>
+
+              <!-- SERVICE ADOPTION BREAKDOWN -->
+              <div class="card">
+                <h3>Active vs Missing Services</h3>
+                <div class="margin-top">
+                  <div style="font-size:12px; color:var(--text-sub); margin-bottom:6px;">Active Subscriptions:</div>
+                  <div class="chip-group" id="activeServicesChips"></div>
+                  <div style="font-size:12px; color:var(--text-sub); margin-top:10px; margin-bottom:6px;">Unadopted Opportunities:</div>
+                  <div class="chip-group" id="missingServicesChips"></div>
+                </div>
+              </div>
+
+              <!-- RECOMMENDED ACTION CARD -->
+              <div class="card action-recommendation-card" id="actionsCard"></div>
+
+              <!-- TAILORED CAMPAIGN EVALUATION & RATIONALE CARD -->
+              <div class="card" id="campaignEvalCard" hidden>
+                <h3>Tailored Campaign Evaluation & Economic Rationale</h3>
+                <div class="margin-top" id="campaignReasonsHost"></div>
+                <hr class="divider">
+                <h4>Alternative Campaigns Evaluated</h4>
+                <div class="table-responsive margin-top">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Campaign</th>
+                        <th>Cost</th>
+                        <th>Success Rate</th>
+                        <th>Net Benefit</th>
+                        <th>ROI</th>
+                      </tr>
+                    </thead>
+                    <tbody id="otherCampaignsTableBody">
+                      <tr><td colspan="5" class="text-center">No alternative campaigns.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- GROWTH & UPSELL CANDIDATES (FOR LOW RISK / NO CHURN) -->
+              <div class="card" id="upsellCard" hidden>
+                <h3>Growth & Upsell Opportunity Candidates</h3>
+                <div class="details-list margin-top" id="upsellList"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CAMPAIGN & OVERRIDE ACTIONS -->
+          <div class="card action-tools-card">
+            <h3>Decision Support & Human-in-the-Loop Actions</h3>
+            <div class="tools-btn-group">
+              <button class="btn btn-secondary" id="btnOpenCompareModal">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Compare Retention Campaigns
+              </button>
+              <button class="btn btn-outline" id="btnOpenOverrideModal">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Override AI Decision (Employee Log)
+              </button>
+            </div>
+          </div>
+
+          <!-- SINGLE CUSTOMER AI CHAT -->
+          <div class="card margin-top">
+            <h3>Consult AI Assistant About This Customer</h3>
+            <div class="chat-box" id="customerThread"></div>
+            <div class="composer-container">
+              <input type="text" id="customerComposerInput" class="composer-input" dir="auto" placeholder="Ask anything about this customer (e.g. Why is this customer at risk and what campaign offers the best ROI?)...">
+              <button class="btn btn-primary" id="customerComposerSend">Send Question</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 3. DATA HUB & DIRECTORY VIEW ================= -->
+      <section class="tab-view" id="view-directory">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">Data Hub & Customer Directory</h1>
+            <p class="view-subtitle">Upload customer CSV datasets and explore active cohort records</p>
+          </div>
+        </div>
+
+        <!-- UPLOAD DROPZONE -->
+        <div class="card">
+          <div class="card-title-bar">
+            <h2>Batch Dataset Upload</h2>
+            <span class="badge badge-outline">CSV Format</span>
+          </div>
+          <div class="dropzone" id="dropzone">
+            <input type="file" id="csvInput" accept=".csv" hidden>
+            <div class="dropzone-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <h3>Drag & drop your CSV file here or <span class="dropzone-link" id="dropzoneClick">Browse Files</span></h3>
+            <p class="dropzone-hint">Supports standard Telco Churn CSV schema files</p>
+          </div>
+
+          <div id="fileCardHost"></div>
+
+          <div class="upload-actions" id="uploadActions" hidden>
+            <button class="btn btn-primary" id="btnAnalyze">Start Batch Processing</button>
+            <button class="btn btn-danger-ghost" id="btnClearFile">Remove File</button>
+          </div>
+
+          <div id="uploadMsgHost"></div>
+        </div>
+
+        <!-- DIRECTORY TABLE CARD -->
+        <div class="card margin-top">
+          <div class="table-toolbar">
+            <div class="search-input-wrap">
+              <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="dirSearchInput" class="form-control" placeholder="Filter by Customer ID...">
+            </div>
+            <div class="table-counter" id="dirTableCount">Total Customers: 0</div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Tenure</th>
+                  <th>Contract Type</th>
+                  <th>Behavioral Segment</th>
+                  <th>Monthly Charges</th>
+                  <th>Internet Service</th>
+                  <th>Churn Status</th>
+                  <th>Risk Level</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="dirTableBody">
+                <tr><td colspan="8" class="text-center">Loading customer records...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- PAGINATION TOOLBAR -->
+          <div class="pagination-bar">
+            <button class="btn btn-sm btn-secondary" id="btnPrevPage" disabled>Previous</button>
+            <span id="pageIndicator">Page 1</span>
+            <button class="btn btn-sm btn-secondary" id="btnNextPage">Next</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= MODALS & DRAWERS ================= -->
+
+  <!-- FLOATING AI ASSISTANT DRAWER -->
+  <div class="modal-overlay" id="aiAssistantDrawer" hidden>
+    <div class="drawer-card">
+      <div class="modal-header">
+        <h3>AI Assistant & Dataset Conversational Hub</h3>
+        <button class="modal-close" id="btnCloseAiDrawer">&times;</button>
+      </div>
+      <div class="drawer-body">
+        <div class="chat-layout">
+          <!-- SESSIONS SIDEBAR -->
+          <aside class="sessions-sidebar">
+            <button class="btn btn-primary btn-full" id="btnNewChatSession">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              New Chat
+            </button>
+            <div class="sidebar-section-title">Saved Sessions</div>
+            <div class="session-list" id="chatSessionList"></div>
+          </aside>
+
+          <!-- CHAT WINDOW -->
+          <div class="chat-main">
+            <div class="chat-box chat-thread-full" id="datasetThread"></div>
+            <div class="composer-container">
+              <input type="text" id="datasetComposerInput" class="composer-input" dir="auto" placeholder="Ask AI assistant about dataset insights, risk cohorts, or top churn drivers...">
+              <button class="btn btn-primary" id="datasetComposerSend">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAMPAIGN COMPARISON MODAL -->
+  <div class="modal-overlay" id="compareModal" hidden>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Campaign Comparison Tool</h3>
+        <button class="modal-close" id="btnCloseCompareModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="campaign-compare-grid">
+          <div class="campaign-box">
+            <h4>Campaign A (Default)</h4>
+            <input type="text" id="campAName" class="form-control" value="20% Discount on Fiber Package">
+            <label>Campaign Cost ($)</label>
+            <input type="number" id="campACost" class="form-control" value="50">
+            <label>Expected Success Rate (%)</label>
+            <input type="number" id="campASucc" class="form-control" value="65">
+          </div>
+          <div class="campaign-box">
+            <h4>Campaign B (Alternative)</h4>
+            <input type="text" id="campBName" class="form-control" value="Annual Contract + Free Router">
+            <label>Campaign Cost ($)</label>
+            <input type="number" id="campBCost" class="form-control" value="120">
+            <label>Expected Success Rate (%)</label>
+            <input type="number" id="campBSucc" class="form-control" value="85">
+          </div>
+        </div>
+        <button class="btn btn-primary margin-top" id="btnRunComparison">Run Campaign Comparison</button>
+        <div id="compareResultHost" class="margin-top"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMPLOYEE OVERRIDE MODAL -->
+  <div class="modal-overlay" id="overrideModal" hidden>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Record Employee Override Decision</h3>
+        <button class="modal-close" id="btnCloseOverrideModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>AI Recommendation</label>
+          <input type="text" id="overrideAiRec" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+          <label>Actual Employee Decision</label>
+          <input type="text" id="overrideEmployeeDec" class="form-control" placeholder="Enter actual retention offer approved...">
+        </div>
+        <div class="form-group">
+          <label>Override Rationale / Notes</label>
+          <textarea id="overrideReason" class="form-control" rows="3" placeholder="Provide context on why decision differed from AI recommendation..."></textarea>
+        </div>
+        <button class="btn btn-primary margin-top" id="btnSubmitOverride">Log Decision & Audit Record</button>
+        <div id="overrideMsgHost" class="margin-top"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Bundle -->
+  <script src="/static/app.js?v=5"></script>
+</body>
+</html>

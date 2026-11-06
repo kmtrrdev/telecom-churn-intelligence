@@ -1,0 +1,43 @@
+customerID,source,added_at,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleLines,InternetService,OnlineSecurity,OnlineBackup,DeviceProtection,TechSupport,StreamingTV,StreamingMovies,Contract,PaperlessBilling,PaymentMethod,MonthlyCharges,TotalCharges
+MANUAL-F359C7F6,manual,2026-08-14T01:36:37.945136+00:00,Male,0,Yes,No,6,Yes,No,Fiber optic,No,No,No,No,Yes,No,Month-to-month,Yes,Electronic check,108.0,648.0
+FAKE-1000,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,Yes,No,12,Yes,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,Yes,Bank transfer (automatic),79.06,876.05
+FAKE-1001,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,No,No,8,Yes,No,DSL,Yes,No,Yes,Yes,Yes,Yes,Month-to-month,Yes,Credit card (automatic),39.66,294.21
+FAKE-1002,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,Yes,Yes,72,Yes,No,DSL,Yes,Yes,Yes,Yes,No,No,Two year,Yes,Mailed check,38.37,2699.47
+FAKE-1003,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,Yes,No,24,Yes,No,DSL,Yes,No,No,No,No,No,Month-to-month,Yes,Credit card (automatic),62.9,1386.27
+FAKE-1004,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,Yes,No,8,Yes,No,DSL,No,Yes,No,Yes,No,No,Two year,No,Bank transfer (automatic),113.83,941.81
+FAKE-1005,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,Yes,Yes,5,No,No phone service,Fiber optic,Yes,Yes,No,Yes,No,No,Month-to-month,No,Electronic check,79.92,376.18
+FAKE-1006,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,1,No,No,18,Yes,Yes,Fiber optic,No,Yes,No,Yes,Yes,No,Month-to-month,No,Credit card (automatic),112.48,2019.91
+FAKE-1007,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,Yes,No,8,Yes,Yes,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,Yes,Bank transfer (automatic),117.11,962.49
+FAKE-1008,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,No,Yes,30,Yes,Yes,DSL,Yes,Yes,Yes,Yes,Yes,Yes,Month-to-month,Yes,Bank transfer (automatic),109.37,3186.95
+FAKE-1009,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,No,No,2,No,No phone service,DSL,No,No,No,Yes,No,No,Month-to-month,Yes,Mailed check,100.43,199.86
+FAKE-1010,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,No,No,0,Yes,Yes,DSL,Yes,Yes,No,Yes,Yes,Yes,Month-to-month,Yes,Bank transfer (automatic),101.44,0.0
+FAKE-1011,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,Yes,No,8,Yes,No,DSL,Yes,Yes,Yes,Yes,No,Yes,Month-to-month,No,Credit card (automatic),55.09,460.89
+FAKE-1012,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,No,No,8,Yes,Yes,DSL,Yes,No,Yes,Yes,No,Yes,Month-to-month,No,Electronic check,42.44,312.95
+FAKE-1013,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,No,Yes,3,Yes,Yes,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Two year,Yes,Credit card (automatic),27.21,83.69
+FAKE-1014,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,Yes,No,2,Yes,No,Fiber optic,No,Yes,Yes,No,Yes,Yes,Month-to-month,Yes,Mailed check,83.81,155.24
+FAKE-1015,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,1,No,No,2,Yes,No,DSL,Yes,Yes,No,Yes,Yes,Yes,Month-to-month,No,Credit card (automatic),74.63,146.19
+FAKE-1016,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,No,No,2,Yes,Yes,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,One year,Yes,Electronic check,83.49,152.39
+FAKE-1017,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,1,No,Yes,2,Yes,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,Yes,Credit card (automatic),73.97,148.5
+FAKE-1018,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,No,Yes,3,Yes,Yes,Fiber optic,No,No,No,No,No,Yes,Month-to-month,No,Bank transfer (automatic),85.08,251.47
+FAKE-1019,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,No,Yes,1,Yes,Yes,Fiber optic,No,Yes,No,Yes,No,No,Month-to-month,Yes,Mailed check,68.24,63.41
+FAKE-1020,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,1,Yes,No,2,No,No phone service,Fiber optic,Yes,Yes,Yes,No,Yes,Yes,Month-to-month,Yes,Electronic check,51.74,101.71
+FAKE-1021,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,1,No,Yes,30,Yes,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,No,Electronic check,25.18,703.53
+FAKE-1022,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,Yes,No,18,Yes,No,Fiber optic,Yes,No,No,Yes,Yes,No,One year,No,Credit card (automatic),74.39,1264.67
+FAKE-1023,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,No,Yes,60,Yes,Yes,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,Yes,Electronic check,20.82,1232.75
+FAKE-1024,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,Yes,No,8,Yes,No,Fiber optic,Yes,No,No,No,Yes,Yes,Month-to-month,Yes,Credit card (automatic),21.96,166.1
+FAKE-1025,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,Yes,No,60,Yes,No,Fiber optic,Yes,Yes,No,No,Yes,No,Month-to-month,No,Bank transfer (automatic),31.54,1978.37
+FAKE-1026,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,No,Yes,66,Yes,No,Fiber optic,No,Yes,Yes,Yes,No,Yes,One year,Yes,Mailed check,111.35,7101.82
+FAKE-1027,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,Yes,Yes,55,Yes,No,Fiber optic,Yes,No,No,No,No,Yes,Month-to-month,Yes,Credit card (automatic),34.18,1725.79
+FAKE-1028,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,No,No,5,Yes,No,Fiber optic,Yes,No,No,Yes,No,No,Two year,No,Credit card (automatic),84.28,382.3
+FAKE-1029,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,No,Yes,72,Yes,Yes,DSL,No,Yes,Yes,Yes,Yes,Yes,Two year,Yes,Electronic check,106.45,7629.61
+FAKE-1030,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,Yes,Yes,18,Yes,Yes,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,Yes,Mailed check,39.89,686.85
+FAKE-1031,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,Yes,No,30,Yes,Yes,DSL,No,Yes,Yes,Yes,Yes,No,Month-to-month,No,Credit card (automatic),68.6,2066.1
+FAKE-1032,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,1,Yes,No,2,Yes,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Month-to-month,No,Electronic check,43.5,85.88
+FAKE-1033,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,Yes,Yes,2,No,No phone service,DSL,No,No,Yes,Yes,Yes,No,Month-to-month,No,Bank transfer (automatic),69.54,142.41
+FAKE-1034,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,Yes,No,72,Yes,No,Fiber optic,Yes,Yes,No,Yes,Yes,Yes,Two year,No,Mailed check,63.74,4332.2
+FAKE-1035,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,No,No,66,Yes,Yes,DSL,Yes,Yes,No,Yes,No,Yes,Month-to-month,Yes,Bank transfer (automatic),53.79,3257.47
+FAKE-1036,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,1,Yes,Yes,30,Yes,No,DSL,Yes,Yes,Yes,No,No,No,One year,Yes,Credit card (automatic),118.64,3403.1
+FAKE-1037,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,0,No,No,8,Yes,Yes,Fiber optic,No,No,No,Yes,Yes,Yes,One year,No,Credit card (automatic),29.34,228.59
+FAKE-1038,csv_upload,2026-08-14T11:01:28.472951+00:00,Female,0,Yes,No,60,Yes,Yes,Fiber optic,Yes,Yes,Yes,Yes,No,No,Two year,No,Credit card (automatic),106.6,5970.92
+FAKE-1039,csv_upload,2026-08-14T11:01:28.472951+00:00,Male,1,No,No,2,Yes,Yes,Fiber optic,Yes,No,Yes,Yes,Yes,No,Two year,Yes,Mailed check,82.2,165.12
+MANUAL-B855C1E4,manual,2026-08-14T11:16:04.788754+00:00,Male,0,Yes,No,6,Yes,No,Fiber optic,No,No,No,No,Yes,No,Month-to-month,Yes,Electronic check,108.0,648.0

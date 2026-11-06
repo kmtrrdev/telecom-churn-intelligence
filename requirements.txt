@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+pandas
+numpy
+scikit-learn==1.6.1
+xgboost
+joblib
+pydantic
+huggingface_hub>=0.28.0
+pytest
+imbalanced-learn
+shap
+python-dotenv
+python-multipart

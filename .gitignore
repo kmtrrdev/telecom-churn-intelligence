@@ -1,0 +1,14 @@
+﻿__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.DS_Store
+# runtime data
+data/sessions/
+data/current_upload.csv
+feedback_data/*.jsonl
+

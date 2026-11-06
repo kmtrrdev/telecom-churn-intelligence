@@ -1,0 +1,80 @@
+{
+  "campaigns": [
+    {
+      "campaign_id": "RET_CONTRACT_UPGRADE",
+      "name": "Contract Loyalty Upgrade",
+      "type": "RETENTION",
+      "applies_if_field": "Contract",
+      "applies_if_value": "Month-to-month",
+      "target_segments": ["Price-Sensitive", "High-Value At-Risk", "New & Fragile"],
+      "cost": 30.0,
+      "success_probability": 0.45,
+      "description": "Offer a discounted 1-year contract to replace the month-to-month plan, trading a short-term discount for longer-term retention."
+    },
+    {
+      "campaign_id": "RET_TECH_SUPPORT_TRIAL",
+      "name": "Free Tech Support Trial",
+      "type": "RETENTION",
+      "applies_if_field": "TechSupport",
+      "applies_if_value": "No",
+      "target_segments": ["Service Gap", "New & Fragile"],
+      "cost": 15.0,
+      "success_probability": 0.40,
+      "description": "Add a free 3-month Tech Support trial to address a service gap linked to churn risk."
+    },
+    {
+      "campaign_id": "RET_SECURITY_TRIAL",
+      "name": "Free Online Security Trial",
+      "type": "RETENTION",
+      "applies_if_field": "OnlineSecurity",
+      "applies_if_value": "No",
+      "target_segments": ["Service Gap", "New & Fragile"],
+      "cost": 15.0,
+      "success_probability": 0.38,
+      "description": "Add a free 3-month Online Security trial to address a service gap linked to churn risk."
+    },
+    {
+      "campaign_id": "RET_FIBER_SPEED_BOOST",
+      "name": "Fiber Optic Speed Upgrade Credit",
+      "type": "RETENTION",
+      "applies_if_field": "InternetService",
+      "applies_if_value": "Fiber optic",
+      "target_segments": ["Price-Sensitive", "High-Value At-Risk"],
+      "cost": 25.0,
+      "success_probability": 0.42,
+      "description": "Provide a premium speed upgrade credit for high-cost Fiber Optic customers to increase perceived plan value."
+    },
+    {
+      "campaign_id": "RET_AUTOPAY_CREDIT",
+      "name": "Auto-Pay & Digital Discount",
+      "type": "RETENTION",
+      "applies_if_field": "PaymentMethod",
+      "applies_if_value": "Electronic check",
+      "target_segments": ["Price-Sensitive", "Low-Value High-Risk"],
+      "cost": 10.0,
+      "success_probability": 0.32,
+      "description": "Offer a $10 recurring monthly bill credit for switching from electronic check to automated bank transfer."
+    },
+    {
+      "campaign_id": "RET_NEW_CUSTOMER_DISCOUNT",
+      "name": "Early-Tenure Loyalty Discount",
+      "type": "RETENTION",
+      "applies_if_field": "tenure",
+      "applies_if_max": 12,
+      "target_segments": ["New & Fragile"],
+      "cost": 20.0,
+      "success_probability": 0.35,
+      "description": "Short-term bill discount for a newer customer still forming loyalty, to reduce early-life churn."
+    },
+    {
+      "campaign_id": "RET_HIGH_TOUCH_CALL",
+      "name": "Retention Call - High Touch Specialist",
+      "type": "RETENTION",
+      "applies_if_field": null,
+      "target_segments": ["High-Value At-Risk", "Low-Value High-Risk"],
+      "cost": 40.0,
+      "success_probability": 0.40,
+      "description": "Personal outreach call from a retention specialist to understand concerns and negotiate a tailored offer."
+    }
+  ]
+}
